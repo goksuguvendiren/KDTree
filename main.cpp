@@ -20,7 +20,7 @@ int main()
     spdlog::flush_every(std::chrono::seconds(1));
     spdlog::set_level(spdlog::level::trace);
 
-    kd_tree::tree<1> tree(std::vector<vec<1>>{{1}, {2}, {5}, {3}, {0}});
+    kd_tree::tree<glm::vec1> tree(std::vector<glm::vec1>{glm::vec1{1}, glm::vec1{2}, glm::vec1{5}, glm::vec1{3}, glm::vec1{0}});
 
     return 0;
 }
