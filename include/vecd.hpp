@@ -9,38 +9,43 @@
 // user defined types logging by implementing operator<<
 #include "spdlog/fmt/ostr.h" // must be included
 
-template<int d>
-struct vec : glm::vec<d, float, glm::defaultp>
+//template<int d>
+//struct vec : glm::vec<d, float, glm::defaultp>
+//{
+//    using glm::vec<d, float, glm::defaultp>::vec;
+//
+//    vec(float scalar)
+//        : glm::vec<d, float, glm::defaultp>(scalar)
+//    {}
+//    vec(glm::vec1 scalar)
+//        : glm::vec<d, float, glm::defaultp>(scalar)
+//    {}
+//
+namespace glm
 {
-    using glm::vec<d, float, glm::defaultp>::vec;
+template<length_t D, class T, qualifier Prec>
+std::ostream& operator<<(std::ostream& os, const glm::vec<D, T, Prec>& vec)
+{
+    int d = vec.length();
+    os << '{';
+    for (int i = 0; i < d; ++i) os << vec[i] << ", ";
 
-    vec(float scalar)
-        : glm::vec<d, float, glm::defaultp>(scalar)
-    {}
-    vec(glm::vec1 scalar)
-        : glm::vec<d, float, glm::defaultp>(scalar)
-    {}
-
-    friend std::ostream& operator<<(std::ostream& os, vec& vec)
-    {
-        os << "{";
-        for (int i = 0; i < d; ++i) os << vec[i] << ", ";
-
-        os << '\b';
-        os << '\b';
-        os << "}";
-        return os;
-    }
-
-    template<typename OStream>
-    friend OStream& operator<<(OStream& os, const vec& vec)
-    {
-        os << "{";
-        for (int i = 0; i < d; ++i) os << vec[i] << ", ";
-
-        os << '\b';
-        os << '\b';
-        os << "}";
-        return os;
-    }
-};
+    os << '\b';
+    os << '\b';
+    os << '}';
+    return os;
+}
+}
+//
+//    template<typename OStream>
+//    friend OStream& operator<<(OStream& os, const vec& vec)
+//    {
+//        os << "{";
+//        for (int i = 0; i < d; ++i) os << vec[i] << ", ";
+//
+//        os << '\b';
+//        os << '\b';
+//        os << "}";
+//        return os;
+//    }
+//};
