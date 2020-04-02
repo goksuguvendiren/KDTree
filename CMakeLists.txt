@@ -18,13 +18,13 @@ set(CMAKE_BUILD_TYPE Debug)
 
 add_subdirectory(third_party)
 
-add_library(kd_tree_lib include/kd_tree.hpp src/kd_tree.cpp)
+add_library(kd_tree_lib include/kd_tree.hpp src/kd_tree.cpp include/node.hpp include/utils.hpp include/vecd.hpp)
+target_link_libraries(kd_tree_lib PUBLIC spdlog::spdlog)
 
 target_include_directories(kd_tree_lib PUBLIC include)
 
-add_executable(kd_tree main.cpp include/node.hpp include/utils.hpp include/vecd.hpp)
+add_executable(kd_tree main.cpp)
 target_link_libraries(kd_tree PUBLIC kd_tree_lib)
-target_link_libraries(kd_tree PUBLIC spdlog::spdlog)
 
 #add_executable(test_kdtree "test_kdtree.cpp")
 #target_link_libraries(test_kdtree KDTree)

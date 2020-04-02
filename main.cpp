@@ -10,7 +10,7 @@
 
 int main()
 {
-    auto logger = spdlog::basic_logger_mt("basic_logger", "../logs/basic.txt");
+    auto logger = spdlog::basic_logger_mt("basic_logger", "../logs/today.txt");
     spdlog::set_default_logger(logger);
     logger->set_level(spdlog::level::info);
     logger->flush_on(spdlog::level::info);
@@ -18,9 +18,9 @@ int main()
     spdlog::set_default_logger(logger);
     logger->info("Starting KDTree");
     spdlog::flush_every(std::chrono::seconds(1));
-    spdlog::set_level(spdlog::level::debug);
+    spdlog::set_level(spdlog::level::trace);
 
-    kd_tree::tree<1> tree(std::vector<glm::vec1>{{1}, {2}, {5}, {3}, {0}});
+    kd_tree::tree<1> tree(std::vector<vec<1>>{{1}, {2}, {5}, {3}, {0}});
 
     return 0;
 }
